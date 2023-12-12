@@ -1,6 +1,6 @@
 name: Python CI
 
-on: workflow_call
+on: workflow_dispatch
 
 env:
   AZURE_WEBAPP_NAME: axe-lab-appl-vallspineda-wa # set this to your application's name
