@@ -1,24 +1,32 @@
-name: Python CI
+name: Build and deploy Python app
 
 on: workflow_dispatch
 
 env:
   AZURE_WEBAPP_NAME: axe-lab-appl-vallspineda-wa # set this to your application's name
   AZURE_WEBAPP_PACKAGE_PATH: '.' # set this to the path to your web app project, defaults to the repository root
+  PYTHON_VERSION: '3.10'
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+    # checkout the repo 
     - uses: actions/checkout@v4
-    - name: Set up Python 3.x
-      uses: actions/setup-python@v4
+    # setup python
+    - name: Setup Python
+      uses: actions/setup-python@v1
       with:
-        python-version: 3.x
+       python-version: ${{ env.PYTHON_VERSION }}
+    # install dependencies
     - name: Install dependencies
+      working-directory: ${{ env.WORKING_DIRECTORY }}
       run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
+       sudo apt install python${{ env.PYTHON_VERSION }}-venv
+       python -m venv --copies antenv
+       source antenv/bin/activate
+       pip install setuptools
+       pip install -r requirements.txt
     - name: Building web app
       uses: azure/appservice-build@v2
     - name: Deploy web App using GH Action azure/webapps-deploy
