@@ -10,7 +10,7 @@
 name: Build and deploy Python app to Azure Web App
 
 env:
-  AZURE_WEBAPP_NAME: axe-lab-appl-vallspineda-wa   # set this to your application's name
+  AZURE_WEBAPP_NAME: axe-lab-valls-python   # set this to your application's name
   PYTHON_VERSION: '3.8'               # set this to the Python version to use
 
 on:
