@@ -20,7 +20,7 @@ jobs:
        python-version: ${{ env.PYTHON_VERSION }}
     # install dependencies
     - name: Install dependencies
-      working-directory: ${{ env.WORKING_DIRECTORY }}
+      working-directory: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
       run: |
        sudo apt install python${{ env.PYTHON_VERSION }}-venv
        python -m venv --copies antenv
